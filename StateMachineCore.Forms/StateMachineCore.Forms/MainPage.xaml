@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:StateMachineCore.Forms"
+             xmlns:vm="clr-namespace:StateMachineCore.Forms.ViewModels"
+             x:Class="StateMachineCore.Forms.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="17"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Padding -->
+            <RowDefinition Height="20" />
+            <!-- Command Buttons1 -->
+            <RowDefinition Height="Auto" />
+            <!-- Command Buttons2 -->
+            <RowDefinition Height="Auto" />
+            <!-- Status1 -->
+            <RowDefinition Height="Auto" />
+            <!-- Status2 -->
+            <RowDefinition Height="Auto" />
+            <!-- Latest Message -->
+            <RowDefinition Height="Auto" />
+            <!-- Message Logs -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Command Buttons1 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Stop" Command="{Binding StopCommand}"/>
+            <Button Grid.Column="1" Text="Start" Command="{Binding StartCommand}"/>
+            <Button Grid.Column="2" Text="Up" Command="{Binding UpCommand}"/>
+            <Button Grid.Column="3" Text="Down" Command="{Binding DownCommand}"/>
+        </Grid>
+
+        <!-- Command Buttons2 -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Cool" Command="{Binding CoolCommand}"/>
+            <Button Grid.Column="1" Text="Heat" Command="{Binding HeatCommand}"/>
+            <Button Grid.Column="2" Text="Dry" Command="{Binding DryCommand}"/>
+            <Button Grid.Column="3" Text="Clean" Command="{Binding CleanCommand}"/>
+        </Grid>
+
+        <!-- Status1 -->
+        <StackLayout Grid.Row="3" Orientation="Horizontal">
+            <Label Text="状態:"/>
+            <Label Text="{Binding Status.Value}"/>
+        </StackLayout>
+
+        <!-- Status2 -->
+        <StackLayout Grid.Row="4" Orientation="Horizontal">
+            <Label Text="目標温度:"/>
+            <Label Text="{Binding TargetTemp.Value}"/>
+            <Label Text="温度:"/>
+            <Label Text="{Binding Temperature.Value}"/>
+            <Label Text="湿度:"/>
+            <Label Text="{Binding Humidity.Value}"/>
+        </StackLayout>
+
+        <!-- Latest Message -->
+        <StackLayout Grid.Row="5" Orientation="Horizontal">
+            <Label Text="Message:"/>
+            <Label Text="{Binding Message.Value}"/>
+        </StackLayout>
+
+        <!-- Message Logs -->
+        <ListView Grid.Row="6" Margin="5"
+                  ItemsSource="{Binding MessageLog}"
+                  HorizontalScrollBarVisibility="Default"
+                  VerticalScrollBarVisibility="Always"
+                  SeparatorVisibility="None"
+                  SelectionMode="None"/>
+    </Grid>
+</ContentPage>
